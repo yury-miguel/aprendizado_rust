@@ -5,7 +5,7 @@ mod estudos;
 mod projetos;
 
 
-// ======================================== EXEMPLOS ================================================
+// ======================================== ESTUDOS ================================================
 
 fn enum_options() {
     let op1 = estudos::enums_options::Operacao::Soma(5, 3);
@@ -39,6 +39,28 @@ fn result_erro() {
 
 }
 
+
+fn modulo_calculadora() {
+
+    let soma1 = estudos::calculadora::calculadora::somar(5, 5);
+    let subtracao1 = estudos::calculadora::calculadora::subtrair(10, 2);
+    //let multiplica1 = estudos::calculadora::calculadora::multiplicar(2, 10);
+
+    println!("Soma {}", soma1);
+    println!("Subtracao {}", subtracao1)
+
+    /* 
+        function `multiplicar` is private
+        private functionrustcClick for full compiler diagnostic
+        calculadora.rs(19, 5): the function `multiplicar` is defined here    
+     */
+
+}
+
+
+fn hash_vec() {
+    estudos::estrutura_dados::estrutura_dados();
+}
 
 // ======================================== EXERCICIOS ==============================================
 
@@ -111,14 +133,18 @@ fn erro_result() {
 
 
 fn calcula_formas() {
-    match projetos::calculadora_geometrica::calcular_area("Circulo:5"){
-        Ok(raio) => println!("Raio do circulo: {}",raio),
-        Err(erro) => println!("Erro ao calcular raio: {}", erro)
-    }
+    let testes = [
+        "circulo:5.0",
+        "retangulo:4.0,3.0",
+        "circulo:-1.0",
+        "invalido",
+    ];
 
-    match projetos::calculadora_geometrica::calcular_area("Retangulo:5,15"){
-        Ok(raio) => println!("Area do retangulo: {}",raio),
-        Err(erro) => println!("Erro ao calcular area: {}", erro)
+    for teste in testes {
+        match projetos::calculadora_geometrica::calcular_area(teste){
+            Ok(area) => println!("Area do {}: {}", teste, area),
+            Err(erro) => println!("Erro ao calcular area de {}: {}", teste, erro)
+        }
     }
 }
 
@@ -131,6 +157,8 @@ fn main() {
 
     // Chamando estudos do módulos
     //enum_options();
+    //modulo_calculadora();
+    //hash_vec();
 
 
     // Chamando exercicios do módulos
@@ -139,9 +167,9 @@ fn main() {
     //exercicio_gerenciador_biblioteca();
     //enum_forma();
     //result_erro();
-    erro_result();
+    //erro_result();
 
     
     // Chamando projetos do módulos
-    calcula_formas();
+    //calcula_formas();
 }
