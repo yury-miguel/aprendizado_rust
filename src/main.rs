@@ -1,5 +1,7 @@
 // src/main.rs
 
+use std::collections::HashMap;
+
 mod exercicios;
 mod estudos;
 mod projetos;
@@ -25,6 +27,7 @@ fn enum_options() {
         None => println!("Sem resultado!")
     }
 }
+
 
 fn result_erro() {
     match estudos::result_erro::dividir(10, 2) {
@@ -129,7 +132,30 @@ fn erro_result() {
 }
 
 
-// ======================================== EXERCICIOS ==============================================
+fn medias_estudantes() {
+    let estudante1 = exercicios::gerencia_estudantes::Estudante {
+        nome: "Yury".to_string(),
+        notas: vec![5.5, 10.8, 8.8],
+    };
+
+    let estudante2 = exercicios::gerencia_estudantes::Estudante {
+        nome: "Joao".to_string(),
+        notas: vec![7.5, 4.0, 6.2],
+    };
+
+    let mut hashmap_estudante1 = HashMap::new();
+    let mut hashmap_estudante2 = HashMap::new();
+
+    hashmap_estudante1.insert("yury".to_string(), estudante1);
+    hashmap_estudante2.insert("joao".to_string(), estudante2);
+
+    let notas_yury = exercicios::gerencia_estudantes::media_notas(&hashmap_estudante1);
+    let notas_joao = exercicios::gerencia_estudantes::media_notas(&hashmap_estudante2);
+
+    println!("Notas Yury {:?}", notas_yury);
+    println!("Notas Joao {:?}", notas_joao);
+}
+// ======================================== PROJETOS ==============================================
 
 
 fn calcula_formas() {
@@ -172,4 +198,5 @@ fn main() {
     
     // Chamando projetos do módulos
     //calcula_formas();
+    medias_estudantes();
 }
