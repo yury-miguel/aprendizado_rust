@@ -11,9 +11,13 @@ pub fn media_notas(estudantes: &HashMap<String, Estudante>) -> HashMap<String, f
     let mut medias_por_estudante: HashMap<String, f64> = HashMap::new();
 
     for (id, estudante) in estudantes.iter() {
-        let media = estudante.notas.iter().sum::<f64>() / estudante.notas.len() as f64;
-        let nome = estudante.nome.clone();
-        medias_por_estudante.insert(nome.to_string(), media);
+        let media = if estudante.notas.is_empty() {
+            0.0 // media é 0
+        } else {
+            estudante.notas.iter().sum::<f64>() / estudante.notas.len() as f64
+        };
+        medias_por_estudante.insert(id.clone(), media);
     } 
+    
     return medias_por_estudante     
 }

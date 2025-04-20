@@ -9,6 +9,7 @@ mod projetos;
 
 // ======================================== ESTUDOS ================================================
 
+
 fn enum_options() {
     let op1 = estudos::enums_options::Operacao::Soma(5, 3);
     let op2 = estudos::enums_options::Operacao::Subtracao(20, 10);
@@ -64,6 +65,7 @@ fn modulo_calculadora() {
 fn hash_vec() {
     estudos::estrutura_dados::estrutura_dados();
 }
+
 
 // ======================================== EXERCICIOS ==============================================
 
@@ -143,18 +145,18 @@ fn medias_estudantes() {
         notas: vec![7.5, 4.0, 6.2],
     };
 
-    let mut hashmap_estudante1 = HashMap::new();
-    let mut hashmap_estudante2 = HashMap::new();
+    let mut estudantes = HashMap::new();
+    estudantes.insert("yury".to_string(), estudante1);
+    estudantes.insert("joao".to_string(), estudante2);
 
-    hashmap_estudante1.insert("yury".to_string(), estudante1);
-    hashmap_estudante2.insert("joao".to_string(), estudante2);
+    let media_notas = exercicios::gerencia_estudantes::media_notas(&estudantes);
 
-    let notas_yury = exercicios::gerencia_estudantes::media_notas(&hashmap_estudante1);
-    let notas_joao = exercicios::gerencia_estudantes::media_notas(&hashmap_estudante2);
-
-    println!("Notas Yury {:?}", notas_yury);
-    println!("Notas Joao {:?}", notas_joao);
+    for (nome, media) in media_notas {
+        println!("Média de {}: {:.2}", nome, media)
+    }
 }
+
+
 // ======================================== PROJETOS ==============================================
 
 
@@ -175,8 +177,8 @@ fn calcula_formas() {
 }
 
 
-
 // ======================================== EXECUCAO ==============================================
+
 
 fn main() {
     println!("Bem-vindo ao projeto de aprendizado Rust!");

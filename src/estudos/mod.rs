@@ -8,3 +8,4 @@ pub mod result_erro;
 pub mod calculadora;
 pub mod lifetime;
 pub mod estrutura_dados;
+pub mod traits_generics_traitbounds;
