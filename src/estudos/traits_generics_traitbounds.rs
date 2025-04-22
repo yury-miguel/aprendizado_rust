@@ -106,3 +106,72 @@ fn trait_objetos() {
         println!("Objeto: {}", objeto.descricao());
     }
 }
+
+
+/* =========================================== TRAITS BOUNDS ===========================================  */
+
+// Permitem restringir tipos genericos para que implementem comportamentos especificos
+
+// Usando sintaxe onde
+fn largest<T>(list: &[T]) -> &T 
+    where 
+        T: std::cmp::PartialOrd,
+{
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item
+        }
+    }
+
+    largest
+
+}
+
+
+// Sintaxe alternativa
+fn largest_all<T: std::cmp::PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item
+        }
+    }
+
+    largest
+}
+
+
+// Um tipo que deve implementar multiplos traits
+fn print_info<T>(value: T) 
+    where
+        T: std::fmt::Display + std::fmt::Debug + Clone,
+{
+    let clonado = value.clone();
+
+    println!("Display {}", value);
+    println!("Debug {:?}", value);
+    println!("Clonado {}", clonado)
+}
+
+
+// Traits bounds condicionais
+struct Wrapper<T> {
+    value: T,
+}
+
+// Implementacao disponivel somenta para os tipos que implementem Display
+impl<T: std::fmt::Display> Wrapper<T> {
+    fn print(&self) {
+        println!("Valor: {}", self.value);
+    }
+}
+
+// Implementacao disponivel somenta para os tipos que implementem PartialOrd
+impl<T: std::cmp::PartialOrd> Wrapper<T> {
+    fn is_greather_than(&self, other: &T) -> bool {
+        self.value > *other
+    }
+}
