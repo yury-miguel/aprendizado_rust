@@ -157,6 +157,24 @@ fn medias_estudantes() {
 }
 
 
+fn info_formas() {
+    let raio_circulo = exercicios::forma_generica::Forma_Circular{raio: 5.30};
+    let area_retangular = exercicios::forma_generica::Forma_Retangular{altura: 10.0, largura: 3.5}; 
+
+    exercicios::forma_generica::imprime_forma(raio_circulo);
+    exercicios::forma_generica::imprime_forma(area_retangular);
+}
+
+
+fn nome_escolhido_aleatoriamente() {
+    let nomes = vec!["Yury".to_string(), "Erica".to_string(), "Juya".to_string(), "Abadia".to_string()];
+    let estrutura_nomes = exercicios::nome_aleatorio::Nomes{nomes: nomes};
+
+    let nome_escolhido = exercicios::nome_aleatorio::escolhe_nome(&estrutura_nomes);
+
+    println!("Nome escolhido: {:?}", nome_escolhido);
+}
+
 // ======================================== PROJETOS ==============================================
 
 
@@ -196,9 +214,10 @@ fn main() {
     //enum_forma();
     //result_erro();
     //erro_result();
-
+    //info_formas();
+    nome_escolhido_aleatoriamente();
     
     // Chamando projetos do módulos
     //calcula_formas();
-    medias_estudantes();
+    //medias_estudantes();
 }

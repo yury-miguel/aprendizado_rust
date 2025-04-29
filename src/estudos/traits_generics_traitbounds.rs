@@ -12,7 +12,7 @@ em outras linguagens, mas com recursos mais avançados.
 
 /* =========================================== GENÉRICO ===========================================  */
 
-use std::fmt::format;
+use std::{collections::btree_set::Intersection, fmt::format};
 
 // Função generica que funciona com qualquer tipo <T>
 fn print_value<T>(value: T)
@@ -173,5 +173,65 @@ impl<T: std::fmt::Display> Wrapper<T> {
 impl<T: std::cmp::PartialOrd> Wrapper<T> {
     fn is_greather_than(&self, other: &T) -> bool {
         self.value > *other
+    }
+}
+
+
+/* =========================================== TRAITS AVANÇADOS ===========================================  */
+
+trait Iterator {
+    type Item; // tipo associado
+
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+struct Counter {
+    count: u32
+}
+
+impl Iterator for Counter {
+    type Item = u32; // definindo o tipo associado
+    
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+
+        if self.count < 6 {
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+
+
+/* =========================================== SUPER TRAITS ===========================================  */
+
+trait Printable {
+    fn format(&self) -> String;
+}
+
+trait Animal : Printable {
+    fn especie(&self) -> String;
+    
+    fn make_sound(&self) -> String;
+}
+
+struct Cat {
+    name: String,
+}
+
+impl Printable for Cat {
+    fn format(&self) -> String {
+        format!("Um gato chamado {}", self.name)
+    }
+}
+
+impl Animal for Cat {
+    fn especie(&self) -> String {
+        String::from("Felis catus")
+    }
+
+    fn make_sound(&self) -> String {
+        String::from("Miau!")
     }
 }
