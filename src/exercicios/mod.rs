@@ -5,3 +5,4 @@ pub mod erro_result;
 pub mod gerencia_estudantes;
 pub mod forma_generica;
 pub mod nome_aleatorio;
+pub mod calculadora_testes;

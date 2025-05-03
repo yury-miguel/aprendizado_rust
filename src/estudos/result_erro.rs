@@ -18,12 +18,16 @@ enum Result {
     Ok(T),
     Err(T),
 }
+
+Usar Result ao inves de Option para erro recuperaveis (a menos que a ausencia de valor seja esperada)
+Não usar unrwap() ou expect() em libs, deixar o usuario decidir, a menos que o erro nao deva existir
+O anyhow simplifica o tratamento de erros em aplicacoes
+
 */
 
 
 use std::fs::File;
 use std::io::{self, Read};
-use std::task::Context;
 use anyhow::{Result, Context, anyhow};
 use thiserror::Error;
 
@@ -85,7 +89,7 @@ pub fn le_arquivo() -> Result<String, io::Error> {
 
 pub fn ler_config() -> Result<String> {
     let conteudo = std::fs::read_to_string("config.txt")
-    .context("Falha ao ler arquivo de configuração");
+    .context("Falha ao ler arquivo de configuração")?;
 
     if conteudo.is_empty() {
         return Err(anyhow!("O arquivo de configuração esta vazio"));
@@ -107,7 +111,7 @@ enum erros {
 
 }
 
-pub fn meu_erro(valors: &str) -> Result<(), erros> {
+pub fn meu_erro(valor: &str) -> Result<(), erros> {
     if valor.is_empty() {
         return Err(erros::InvalidValue("valor vazio".to_string()));
     }

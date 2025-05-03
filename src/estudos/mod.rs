@@ -9,3 +9,4 @@ pub mod calculadora;
 pub mod lifetime;
 pub mod estrutura_dados;
 pub mod traits_generics_traitbounds;
+pub mod testes;
